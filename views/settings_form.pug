@@ -1,0 +1,31 @@
+extends layout
+
+block content
+    h3 #{title}
+
+    form(method='POST' action='')
+        div.form-group
+            label(for='login') Логин:
+            input#login.form-control(type='text', placeholder='Login' name='login' value=(undefined === settings ? '' : settings.login))
+            p
+            label(for='password') Пароль:
+            input#password.form-control(type='text', placeholder='Password' name='password' value=(undefined === settings ? '' : settings.password))
+            p
+            label(for='interval') Интервал обновления в минутах:
+            select#interval.form-control(name='interval')
+                option(selected=(undefined === settings ? true : (settings.mode == '15' ? false : true))) 15
+                option(selected=(settings.mode == '30' ? true : false)) 30
+                option(selected=(settings.mode == '60' ? true : false)) 60
+            p
+            label(for='catalog') Каталог:
+            input#catalog.form-control(type='text', placeholder='Catalog' name='catalog' value=(undefined === settings ? '' : settings.catalog))
+            p
+            label(for='password') Производитель:
+            input#password.form-control(type='text', placeholder='Manufacturer' name='manufacturer' value=(undefined === settings ? '' : settings.manufacturer))
+            p
+        button.btn.btn-primary(type='submit') Сохранить
+
+    if errors
+        ul
+            for error in errors
+                li!= error.msg

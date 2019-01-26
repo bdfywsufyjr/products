@@ -1,0 +1,37 @@
+extends layout
+
+block content
+
+    h3=title
+
+    p
+
+    <!-- Data table-->
+
+    table#pickle.display
+        thead
+            tr
+                th Item
+                th Product Name
+                th Manufacturer Code
+                th Search Text
+                th Vendor Code
+                th Catalog Code
+                th Action
+        tbody
+
+            each product in product_list
+
+                tr
+                    td #{product.productId}
+                    td #{product.productName}
+                    td #{product.manufacturerCode}
+                    td #{product.searchText}
+                    td #{product.vendorCode}
+                    td #{product.catalogCode}
+                    td
+                        div.dropdown
+                            a(href='#' data-toggle='dropdown').dropdown-toggle Действия
+                            div.dropdown-menu
+                                a(href='../data/settings/' + settings._id + '/update').dropdown-item Изменить
+                                a(href='#' class='next' name='delete' params={id: settings._id}).dropdown-item Удалить
