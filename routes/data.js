@@ -5,6 +5,8 @@ var secret = process.env.SECRET;
 var express                     = require('express');
 var router                      = express.Router();
 
+var jwt = require('jsonwebtoken');
+
 // Require controller modules.
 var product_controller            = require('../controllers/productsController');
 var pricelist_controller          = require('../controllers/pricelistController');

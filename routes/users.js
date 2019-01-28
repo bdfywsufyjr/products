@@ -35,11 +35,8 @@ router.get('/setup', function(req, res) {
 // ---------------------------------------------------------
 router.post('/authenticate', function(req, res) {
 
-    console.log('____Authenticate');
     // find the user
     User.findOne({name: req.body.name}, (err, user) => {
-
-        console.log('Found user: ' + user);
 
         if (err) throw err;
 
@@ -54,28 +51,15 @@ router.post('/authenticate', function(req, res) {
 
                 // if user is found and password is right
                 // create a token
-                var payload = {
-                    admin: user.admin
-                }
+                var payload = {admin: user.admin}
                 var token = jwt.sign(payload, secret, {
                     expiresIn: 86400 // expires in 24 hours
                 });
 
-                res.json({
-                    success: true,
-                    message: 'Enjoy your token!',
-                    token: token
-                });
+                res.json({success: true, token: token});
             }
-
         }
-
     });
-});
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
 });
 
 module.exports = router;
